@@ -1,5 +1,7 @@
-import { Container, Row, Col, Card, Button, Carousel, Form, InputGroup } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
+import { useEffect } from "react";
+
 const dsTour = [
     {
       maTour: 1,
@@ -458,291 +460,184 @@ const dsTour = [
     },
   ];
 
-  
 
-function Home() {
-    const hotTours = dsTour.filter((tour) => tour.hot === "1");
-    const regularTours = dsTour.filter((tour) => tour.hot === "0"); // Tour du lịch
-    // const handleCardClick = (tourId) => {
-    //   console.log("Clicked tour ID:", tourId);
-    //   navigate(`/tour/${tourId}`); // Điều hướng đến trang chi tiết tour
-    // };
-    
+
+function TourDetail() {
+  const { id } = useParams();
+  const tour = dsTour.find((t) => t.maTour === parseInt(id));
+  useEffect(() => {
+    console.log("Scrolled to top");
+    window.scrollTo(0, 0);
+  }, []);
+
+  if (!tour) {
+    return <h2 className="text-center mt-5">Tour không tồn tại</h2>;
+  }
+
   return (
-    <Container fluid className="my-5">
-      {/* SLIDER */}
-      <div className="slider">
-        <Carousel id="demo" className="w-100">
-          <Carousel.Item>
-            <img 
-              className="d-block w-100 img-fluid"
-              src="/src/image/HoiAn.jpg" 
-              alt="Hoi An"
+    <Container className="my-5" style={{ marginTop: "100px", marginBottom: "20px" }}>
+      <Row>
+        <h3 className="fw-bold text-blue my-4 mt-5"> {tour.tenTour}</h3>
+      </Row>
+      <Row>
+        {/* Cột trái: Hình ảnh, Tổng quan, Lịch trình, Mô tả */}
+        <Col md={8} sm={12}>
+          <img src={tour.hinhAnh} className="img-fluid  mb-4 shadow w-100 " alt={tour.tenTour} />
+
+          <div className="my-4">
+            <h4 className="text-blue  fw-bold cap1">Tổng quan:</h4>
+            <Card className="p-3 ">
+              <p style={{ lineHeight: "30px", wordSpacing: "2px" }}>{tour.tongquan}</p>
+            </Card>
+
+            <h4 className="cap1 text-blue  fw-bold mt-3">Lịch trình</h4>
+            <div
+              style={{ lineHeight: "30px", wordSpacing: "2px" }}
+              dangerouslySetInnerHTML={{ __html: tour.lichTrinh }}
             />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 img-fluid"
-              src="/src/image/grand-world-phu-quoc-3-min.jpg"
-              alt="Phu Quoc"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 img-fluid"
-              src="/src/image/river-4705974_1280.jpg"
-              alt="River"
-            />
-          </Carousel.Item>
-        </Carousel>
-      </div>
+          </div>
 
-      {/* SEARCH TOOL */}
-      <div className="search-tool mt-4 rounded-3">
-        <Form className="p-4 border border-2 border-white rounded-circle">
-          <Row className="g-2 align-items-center">
-            <Col md={3}>
-              <InputGroup className="border ">
-                <Form.Control  type="text" name="departure" id="departure" placeholder="Điểm khởi hành" required autoComplete="off"
-                />
-                <InputGroup.Text >
-                  <i className="  fa-solid fa-plane-departure"></i>
-                </InputGroup.Text>
-              </InputGroup>
-            </Col>
-            <Col md={3}>
-              <InputGroup className="border ">
-                <Form.Control  type="text" name="destination" id="destination" placeholder="Điểm đến" required autoComplete="off"
-                />
-                <InputGroup.Text>
-                  <i className=" fa-solid fa-plane-arrival"></i>
-                </InputGroup.Text>
-              </InputGroup>
-            </Col>
-            <Col md={3}>
-              <InputGroup className="border ">
-                <Form.Control placeholder="Thời gian" required type="datetime" name="time" id="time" class="form-control border-0 m-0 px-0 py-1"  autocomplete="off"
-                />
-                <InputGroup.Text>
-                  <i className="  fa-solid fa-calendar"></i>
-                </InputGroup.Text>
-              </InputGroup>
-            </Col>
-            <Col md={3}>
-              <Button variant="danger" type="submit" className="w-100 " style={{padding:"12px 12px"}}>
-                Tìm kiếm
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </div>
+          <img src={tour.hinhAnh2} className="img-fluid w-75 mx-auto d-block my-3 shadow" alt={tour.tenTour} />
 
-      {/* TOUR KHUYẾN MÃI */}
-      <div className="content mt-4 py-4 p">
-        <div className="content-item">
-          <h3 className="fw-bold text-primary">Tour khuyến mãi</h3>
-          <hr className="mb-4" />
-          <Row id="table1">
-          {hotTours.map((tour) => (
-                        <Col md={4} key={tour.maTour} className="mb-4">
-                        <Link to={`/tour/${tour.maTour}`} style={{ textDecoration: "none" }}>
-                          <Card className="card-hover" 
-                            >
-                             
-                          <div className="image-container">
-                              <img src={tour.hinhAnh} className="hinh1 img-fluid" alt={tour.tenTour} />
-                              <img src={tour.hinhAnh2} className="hinh2 img-fluid" alt={tour.tenTour} />
-                            </div>
-                            <Card.Body>
-                              <Card.Title className=" text-blue">{tour.tenTour}</Card.Title>
-                              <Card.Text>
-                              <p>
-                                  <i className="fa-solid fa-clock me-2"></i> Thời gian: {tour.thoiGian}
-                                </p>
-                                <p>
-                                  <i className="fa-solid fa-plane me-2"></i> Phương tiện: {tour.phuongTien}
-                                </p>
-                                <p>
-                                  <i className="fa-solid fa-calendar-day me-2"></i> Ngày khởi hành: {tour.ngayKhoiHanh}
-                                </p>
-                                <div className="tour-price">
-                                  <span className="discount-price h4">{tour.gia}</span>
-                                  <span className="price h6">{tour.giaTruocKhiGiam}</span>
-                                </div>
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                         </Link>  
-                        </Col>
+          <div className="mt-4">
+            <h4 className="text-blue fw-bold">Mô tả:</h4>
+            <Card className="chitiettour p-3 mb-3">
+              <h6 className="schedule fw-bold p-2">Giá tour bao gồm:</h6>
+              <p><span className="text-blue fw-bold">- VẬN CHUYỂN:</span> Xe du lịch 16, 29, 45 chỗ đời mới máy lạnh, tivi, ghế bật.</p>
+              <p><span className="text-blue fw-bold">- PHÒNG NGỦ:</span> 2 khách/phòng, có điều hòa, tivi, tủ lạnh, máy nước nóng, wifi.</p>
+              <p><span className="text-blue fw-bold">- ĂN UỐNG:</span> 3 bữa chính, 1 bữa sáng, 1 bữa tối, 1 bữa trưa, 1 bữa ăn phụ.</p>
+              <p><span className="text-blue fw-bold">- THAM QUAN:</span> Vé tham quan các điểm du lịch trong chương trình.</p>
+              <p><span className="text-blue fw-bold">- HƯỚNG DẪN VIÊN:</span> Hướng dẫn viên nhiệt tình, thân thiện, chuyên nghiệp.</p>
+              <p><span className="text-blue fw-bold">- BẢO HIỂM:</span> Khách được bảo hiểm du lịch trọn gói, mức bồi thường tối đa 100.000.000đ/trường hợp.</p>
+              <p><span className="text-blue fw-bold">- QUÀ TẶNG:</span> Nón du lịch, khăn lạnh, nước tinh khiết.</p>
+            </Card>
+            <Card className="p-3 mb-3">
+              <h6 className="schedule fw-bold p-2">Chính sách trẻ em:</h6>
+              <p><span className="text-blue fw-bold text-uppercase">- Từ 05 - dưới 10 tuổi:</span> 50% giá tour người lớn, ngủ ghép với gia đình.</p>
+              <p><span className="text-blue fw-bold text-uppercase">- Từ 10 tuổi trở lên:</span> Giá tour như người lớn.</p>
+            </Card>
+            <Card className="p-3">
+              <h6 className="schedule fw-bold p-2">Lưu ý:</h6>
+              <p><span className="text-blue fw-bold text-uppercase">- Nếu hủy tour:</span></p>
+              <p>- Hủy tour sau khi đăng ký: 30% giá tour.</p>
+              <p>- Trước ngày đi 20 ngày: 50% giá tour.</p>
+              <p>- Trước ngày đi 10-19 ngày: 75% giá tour.</p>
+              <p>- Trước ngày đi 0-10 ngày: 100% giá tour.</p>
+              <p>- Việc hủy bỏ phải được thông báo trực tiếp với Công ty qua fax, email, tin nhắn và được xác nhận.</p>
+              <p>- Công ty không chịu trách nhiệm phát sinh do lỗi của hãng hàng không, tàu hỏa, tàu thủy.</p>
+            </Card>
+          </div>
+        </Col>
 
-              ))}
-            
-          </Row>
-          <Button variant="primary" className="d-block mx-auto mt-3">
-            Xem thêm
-          </Button>
-        </div>
-      </div>
+        {/* Cột phải: Lịch trình và Giá */}
+        <Col md={4} sm={12}>
+          <Card className="p-4 mb-4 shadow">
+            <h3 className="text-blue fw-bold">Lịch trình và Giá</h3>
+            <h6 className="my-4">Chọn ngày khởi hành và xem giá</h6>
+            <Form.Group className="text-center mb-4">
+              <Form.Control type="date" className="w-50 mx-auto" defaultValue={tour.ngayKhoiHanh.split("/").reverse().join("-")} />
+            </Form.Group>
 
-
-      {/* TOUR DU LICH */}
-      <div className="content mt-4 py-4 ">
-        <div className="content-item">
-          <h3 className="fw-bold text-primary">Tour du lich</h3>
-          <hr className="mb-4" />
-          <Row id="table1">
-          {regularTours.map((tour) => (
-            <Col md={4} key={tour.maTour} className="mb-4">
-              <Link to={`/tour/${tour.maTour}`} style={{ textDecoration: "none" }}>
-                <Card className="card-hover" 
-                  >
-                   
-                <div className="image-container">
-                    <img src={tour.hinhAnh} className="hinh1 img-fluid" alt={tour.tenTour} />
-                    <img src={tour.hinhAnh2} className="hinh2 img-fluid" alt={tour.tenTour} />
-                  </div>
-                  <Card.Body>
-                    <Card.Title className=" text-blue">{tour.tenTour}</Card.Title>
-                    <Card.Text>
-                    <p>
-                        <i className="fa-solid fa-clock me-2"></i> Thời gian: {tour.thoiGian}
-                      </p>
-                      <p>
-                        <i className="fa-solid fa-plane me-2"></i> Phương tiện: {tour.phuongTien}
-                      </p>
-                      <p>
-                        <i className="fa-solid fa-calendar-day me-2"></i> Ngày khởi hành: {tour.ngayKhoiHanh}
-                      </p>
-                      <div className="tour-price">
-                        <span className="discount-price h4">{tour.gia}</span>
-                        <span className="price h6">{tour.giaTruocKhiGiam}</span>
-                      </div>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-               </Link>  
+            <Row className="inputngay my-4 align-items-center">
+              <Col>Người lớn</Col>
+              <Col>{tour.gia}</Col>
+              <Col className="d-flex justify-content-end ">
+                <Button variant="outline-secondary" size="" className="me-2">-</Button>
+                <Form.Control type="text" value="1" readOnly  className="w-25 text-center" />
+                <Button variant="outline-secondary"  className="ms-2">+</Button>
               </Col>
-              ))}
-            
-          </Row>
-          <Button variant="primary" className="d-block mx-auto mt-3">
-            Xem thêm
-          </Button>
-        </div>
-      </div>
-
-      {/* TOUR DU LỊCH */}
-       {/* {regularTours.map((tour) => (
-              <Col md={4} key={tour.maTour} className="mb-4">
-                <Card>
-                  <Card.Img variant="top" src={tour.hinhAnh} alt={tour.tenTour} />
-                  <Card.Body>
-                    <Card.Title>{tour.tenTour}</Card.Title>
-                    <Card.Text>
-                      <strong>Thời gian:</strong> {tour.thoiGian} <br />
-                      <strong>Phương tiện:</strong> {tour.phuongTien} <br />
-                      <strong>Ngày khởi hành:</strong> {tour.ngayKhoiHanh} <br />
-                      <strong>Giá:</strong>{" "}
-                      <span className="text-danger">{tour.gia}</span>{" "}
-                      <small className="text-muted text-decoration-line-through">{tour.giaTruocKhiGiam}</small>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+            </Row>
+            <Row className="inputngay my-4 align-items-center">
+              <Col>Trẻ em</Col>
+              <Col></Col>
+              <Col className="d-flex justify-content-end">
+                <Button variant="outline-secondary"  className="me-2">-</Button>
+                <Form.Control type="text" value="0" readOnly className="w-25 text-center" />
+                <Button variant="outline-secondary"  className="ms-2">+</Button>
               </Col>
-            ))} */}
-      {/* <div className="content mt-4 py-4 bg-light">
-        <div className="content-item">
-          <h3 className="fw-bold text-primary">Tour Du Lịch</h3>
-          <hr className="mb-4" />
-          <Row id="table2">
-           
-
-            {hotTours.map((tour) => (
-
-            <Col md={4} key={tour.maTour} className="mb-4">
-                <Card>
-                  <Card.Img variant="top" src={tour.hinhAnh} alt={tour.tenTour} />
-                  <Card.Body>
-                    <Card.Title>{tour.tenTour}</Card.Title>
-                    <Card.Text>
-                      <strong>Thời gian:</strong> {tour.thoiGian} <br />
-                      <strong>Phương tiện:</strong> {tour.phuongTien} <br />
-                      <strong>Ngày khởi hành:</strong> {tour.ngayKhoiHanh} <br />
-                      <strong>Giá:</strong>{" "}
-                      <span className="text-danger">{tour.gia}</span>{" "}
-                      <small className="text-muted text-decoration-line-through">
-                        {tour.giaTruocKhiGiam}
-                      </small>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+            </Row>
+            <Row className="my-4 align-items-center">
+              <Col><h6>Tổng Giá Tour</h6></Col>
+              <Col><span className="text-blue h3">{tour.gia}</span></Col>
+            </Row>
+            <Row className="my-4">
+              <Col>
+                <Button variant="outline-danger" className="w-100 fw-bold fs-5">Liên hệ tư vấn</Button>
               </Col>
-              ))}
-          </Row>
-          <Button as={Link} to="/xem-them" variant="primary" className="d-block mx-auto mt-3 fw-bold">
-            Xem thêm
-          </Button>
-        </div>
-       </div> */}
+              <Col>
+                <Button variant="danger" className="w-100 fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#bookingModal">
+                  Đặt Tour ngay
+                </Button>
+              </Col>
+            </Row>
+          </Card>
+
+          {/* Modal Đặt Tour */}
+          {/* <Modal id="bookingModal" centered>
+            <Modal.Header closeButton>
+              <Modal.Title className="text-blue fw-bold">Thông Tin Đăng Ký Tour</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="p-4">
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>Họ và tên:</Form.Label>
+                  <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control type="email" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Số điện thoại:</Form.Label>
+                  <Form.Control type="tel" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Ngày khởi hành:</Form.Label>
+                  <Form.Control type="text" value={tour.ngayKhoiHanh} readOnly />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Row>
+                    <Col md={6}>
+                      <Form.Label>Số người lớn:</Form.Label>
+                      <Form.Control type="text" value="1" readOnly />
+                    </Col>
+                    <Col md={6}>
+                      <Form.Label>Số trẻ em:</Form.Label>
+                      <Form.Control type="text" value="0" readOnly />
+                    </Col>
+                  </Row>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Tổng giá:</Form.Label>
+                  <Form.Control type="text" value={tour.gia} readOnly />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" data-bs-dismiss="modal">Đóng</Button>
+              <Button variant="primary">Xác nhận đặt tour</Button>
+            </Modal.Footer>
+          </Modal> */}
+
+          {/* Thông tin bổ sung */}
+          <Card className="p-4 shadow">
+            <Row className="my-3">
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Bảo hiểm</Col>
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Bữa ăn</Col>
+            </Row>
+            <Row className="my-3">
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Hướng dẫn viên</Col>
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Vé tham quan</Col>
+            </Row>
+            <Row className="my-3">
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Xe Limousine</Col>
+              <Col md={6} xs={6}><i className="fa-solid fa-check text-success me-2" />Xe đưa đón</Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 }
 
-export default Home;
-// import { Container, Row, Col, Card } from "react-bootstrap";
-
-// function Home() {
-//   return (
-//     <Container className="my-5">
-//       <Row className="text-center mb-4">
-//         <Col>
-//           <h1>Welcome to Travel App</h1>
-//           <p className="lead">Explore the world with us!</p>
-//         </Col>
-//       </Row>
-//       <Row>
-//         <Col md={4}>
-//           <Card>
-//             <Card.Body>
-//               <Card.Title>Plan Your Trip</Card.Title>
-//               <Card.Text>
-//                 Create your perfect itinerary with our planning tools
-//               </Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </Col>
-//         <Col md={4}>
-//           <Card>
-//             <Card.Body>
-//               <Card.Title>Book Flights</Card.Title>
-//               <Card.Text>
-//                 Find the best deals on flights worldwide
-//               </Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </Col>
-//         <Col md={4}>
-//           <Card>
-//             <Card.Body>
-//               <Card.Title>Discover Destinations</Card.Title>
-//               <Card.Text>
-//                 Explore new places and cultures
-//               </Card.Text>
-//             </Card.Body>
-//           </Card>
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// }
-
-// export default Home;
-// function Home() {
-//     return (
-//         <div>
-//             <h1>Home</h1>
-//         </div>
-//     );
-// }
-
-// export default Home;
+export default TourDetail;

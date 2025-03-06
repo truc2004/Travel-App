@@ -5,6 +5,12 @@
   text-align: center;
 } */
 
+*{
+  font-family: 'open sans', sans-serif;
+}
+.text-blue {
+  color: #3C669E;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -33,12 +39,21 @@
   }
 }
 
-.card {
+/* .card {
   padding: 2em;
-}
+} */
 
-.read-the-docs {
+/* #container {
+  padding: 50px;
+} */
+
+/* .read-the-docs {
   color: #888;
+} */
+
+.content { 
+  padding: 100px;
+
 }
 
 /* ========================= */
@@ -154,9 +169,201 @@
 
   
     
-    .card:hover, .search-tool:hover  {
-        cursor: pointer;
-        transform: scale(1.02);
-    }
-    
+.card:hover, .search-tool:hover  {
+  cursor: pointer;
+  transform: scale(1.02);
   
+}
+
+.card-hover {
+  transition: transform 0.3s ease;
+}
+
+.card-hover:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.search-tool:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 15vw; /* Giữ chiều cao cố định giống yêu cầu */
+  overflow: hidden;
+}
+
+.hinh1 {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+
+.hinh2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card-hover:hover .hinh1 {
+  opacity: 0;
+}
+
+.card-hover:hover .hinh2 {
+  opacity: 1;
+}
+.card-title {
+  height: 70px;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 22px;
+  color: #3C669E;
+  line-height: 1.5  ;
+  /* margin-bottom: 26px; */
+}
+
+.tour-price {
+  height: 40px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.discount-price {
+  color: orange;
+  font-weight: 600;
+}
+
+.price {
+  color: #8d8a8acc; /* Màu xám nhạt với độ trong suốt */
+  line-height: 40px;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+/* chi tiet tour */
+.cap1:hover{
+  color: #DC3545;
+  cursor: pointer;
+  transform: scale(1.01);
+  
+
+}
+
+/* mo ta */
+.box {
+  border-left: 2px dotted #3C669E;
+  padding: 20px 0 0 18px;
+}
+
+.schedule {
+  color: white;
+  background-color: #F9AB52;
+  font-weight: bold;
+  padding: 5px 0 5px 15px  ;
+  border-radius: 20px;
+  width: 50%;
+  position: relative;
+  border-left: dotted 2px #f000;
+}
+
+.schedule:before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  border: solid 1px #f79321;
+  top: 8px;
+  left: -34px;
+}
+
+.schedule:after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background: #f79321;
+  top: 13px;
+  left: -29px;
+}
+
+.box p {
+  margin: 0;
+}
+
+/* Tinh so luong */
+
+.colright{
+  margin-left: 20px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 32px rgba(0,0,0,.12);
+  
+}
+
+.nl, .inputngay{
+  
+  border-radius: 10px;
+  border: #cecece 1px solid;
+  padding: 5px;
+}
+
+.tien{
+  display: flex;
+
+}
+
+.tien button{
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.tien button:hover{
+  background-color: #cecece;
+}
+#tinh1, #tinhTreEm1{
+  width: 70px;
+  height: 35px;
+  text-align: center;
+}
+#tinh, #tinhTreEm{
+  width: 40px;
+  height: 35px;
+  background-color: none;
+  outline: none;
+  border: 1px solid #ececec;
+  text-align: center;
+  margin: 0 5px;
+}
+
+#txtNgay:hover, .nl:hover{
+  border: #3C669E 2px solid;
+}
+
+#txtGia,#txtGiaTreEm {
+  color: #3C669E;
+  font-weight: bold;
+}
+
+
+/* ----------------- Quy new  ----------------- */
+.box p{
+  line-height: 35px;
+  word-spacing: 2px
+}
