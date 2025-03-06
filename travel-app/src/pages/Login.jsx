@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
@@ -81,6 +82,14 @@ function Login({ show, handleClose }) {
       </Modal.Footer>
     </Modal>
   );
+=======
+function Login() {
+    return (
+        <div>
+            <h1>Login</h1>
+        </div>
+    );
+>>>>>>> Quy
 }
 
 export default Login;
