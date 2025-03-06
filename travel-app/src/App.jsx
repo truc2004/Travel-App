@@ -5,7 +5,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Header from "./components/Header";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 function App() {
   console.log("chay")
@@ -18,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
