@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-function Home() {
-    return (
-        <div>
-            <h1>Home</h1>
-        </div>
-    );
-}
 
-export default Home;
-=======
 import { Container, Row, Col, Card, Button, Carousel, Form, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 const dsTour = [
@@ -757,4 +747,4 @@ export default Home;
 // }
 
 // export default Home;
->>>>>>> Quy
+
