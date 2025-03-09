@@ -1,15 +1,4 @@
-<<<<<<< HEAD
-function About() {
-    return (
-      <div>
-        <h1>About</h1>
-      </div>
-    );
-  }
-  
-  export default About;
-  
-=======
+
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 // import "../styles/custom.css";
@@ -301,4 +290,3 @@ export default About;
 // }
 
 // export default About;
->>>>>>> Quy

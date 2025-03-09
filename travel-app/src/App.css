@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 
-=======
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -60,7 +58,7 @@
 }
 
 /* ========================= */
->>>>>>> Quy
+
 .header-fixed {
   /* background-color: #ffccd5;  */
   position: fixed; /* Cố định header */
@@ -73,16 +71,11 @@
 
 .navbar-nav {
   display: flex;
-<<<<<<< HEAD
-  align-items: center; 
-=======
   align-items: center; /* Căn giữa theo chiều dọc */
->>>>>>> Quy
   justify-content: center;
 }
 
 .navbar-nav .nav-link {
-<<<<<<< HEAD
   font-size: 20px;
   font-weight: 500;
   margin: 0 30px;
@@ -91,13 +84,13 @@
 }
 
 .navbar-nav .nav-link.active {
-  font-size: 21px;
-  font-weight: bold; 
+  /* font-size: 21px;
+  font-weight: bold;  */
   color: #006CB0; 
   text-decoration: underline; 
   text-decoration-color: #006CB0; 
   text-decoration-thickness: 3px; 
-=======
+
   font-size: 23px;
   font-weight: 500;
   margin: 0 30px; /* Tạo khoảng cách giữa các chữ */
@@ -112,21 +105,15 @@
   text-decoration: underline; /* Gạch chân */
   text-decoration-color: #006CB0; /* Màu gạch chân xanh dương */
   text-decoration-thickness: 3px; /* Độ dày của gạch chân */
->>>>>>> Quy
   text-underline-offset: 10px;
 }
 
 .navbar-nav .nav-link:hover {
-<<<<<<< HEAD
-  color: #277DCD; 
-=======
   color: #277DCD; /* Khi hover, đổi sang màu cam nhạt */
->>>>>>> Quy
 }
 
 .logo-img {
   margin-left: 20px;
-<<<<<<< HEAD
   width: 180px;  
   height: 50px;  
   object-fit: contain; 
@@ -151,12 +138,11 @@
   margin-right: 5px;
   margin-left: 10px;
 }
-
-=======
+/* 
   width: 200px;  
   height: 80px;  
   object-fit: contain; /* Đảm bảo không méo hình */
-}
+
 
 .button-custom {
   font-size: 17px;
@@ -423,4 +409,3 @@
   line-height: 35px;
   word-spacing: 2px
 }
->>>>>>> Quy
