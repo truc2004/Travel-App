@@ -23,14 +23,14 @@ function Header() {
           <div className="collapse navbar-collapse justify-content-start" id="navbarNav" style={{ marginLeft: "60px" }}>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">Home</NavLink>
+                <NavLink className="nav-link" to="/">Trang chủ</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/about">About</NavLink>
+                <NavLink className="nav-link" to="/about">Liên hệ</NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">Contact</NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
 

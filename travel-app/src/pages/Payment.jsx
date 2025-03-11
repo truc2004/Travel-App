@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form, Dropdown, Alert } from "react-bootstrap";
-
+import { useBooking } from "../components/BookingContext";
 
 const dsTour = [
     {
@@ -481,6 +481,7 @@ function Payment() {
     const [adultCount, setAdultCount] = useState(1); // Mặc định 1 người lớn
     const [childCount, setChildCount] = useState(0); // Mặc định 0 trẻ em
 
+
     // Quản lý thông tin hành khách
     const [adults, setAdults] = useState([
         { fullName: "", gender: "Nam", dob: "", singleRoom: false }, // Mặc định 1 người lớn
@@ -538,6 +539,68 @@ function Payment() {
         },
     };
 
+    // sử dung context api
+    const { bookTour } = useBooking();
+    const navigate = useNavigate();
+    
+    const handleBooking = () => {
+        console.log(tour.tenTour);
+        if (validateBooking()) {
+            const newTour = {
+                // name: tour.tenTour, // Thay bằng state động nếu có
+                // departureDate: tour.thoiGian,
+                // price: tour.price,
+                // passengers: 2,
+                // image: tour.hinhAnh,
+                // dateStart: tour.ngayKhoiHanh,
+                // total: 100000
+
+                
+                name: tour.tenTour, // Thay bằng state động nếu có
+                departureDate: tour.ngayKhoiHanh,
+                price: tour.gia,
+                image: tour.hinhAnh,
+                passengers: (adultCount + childCount),
+            };
+    
+            bookTour(newTour); // Lưu vào context
+            alert("Đặt tour thành công!");
+            navigate("/OrderHistory"); // Chuyển hướng đến lịch sử đặt tour
+        }
+        
+       
+    };
+
+    
+    const validateBooking = () => {
+        // Kiểm tra thông tin liên lạc
+        const contactName = document.querySelector('input[placeholder="Họ tên"]').value.trim();
+        const contactPhone = document.querySelector('input[placeholder="Nhập số điện thoại"]').value.trim();
+        const contactEmail = document.querySelector('input[placeholder="Nhập email"]').value.trim();
+    
+        if (!contactName || !contactPhone || !contactEmail) {
+            alert("Vui lòng nhập đầy đủ thông tin liên lạc!");
+            return false;
+        }
+    
+        // Kiểm tra thông tin hành khách
+        for (let i = 0; i < adultCount.length; i++) {
+            if (!adultCount[i].fullName.trim() || !adults[i].dob) {
+                alert(`Vui lòng nhập đầy đủ thông tin cho người lớn thứ ${i + 1}!`);
+                return false;
+            }
+        }
+    
+        for (let i = 0; i < childCount.length; i++) {
+            if (!childCount[i].fullName.trim() || !childCount[i].dob) {
+                alert(`Vui lòng nhập đầy đủ thông tin cho trẻ em thứ ${i + 1}!`);
+                return false;
+            }
+        }
+    
+        return true;
+    };
+    
     return (
         <Container className="my-5" style={{ marginTop: "80px", marginBottom: "20px" }}>
             <Row>
@@ -811,12 +874,17 @@ function Payment() {
                         <Row className="fw-bold text-center">
                             <Col xs={6} className="text-start">Tổng tiền:</Col>
                             <Col xs={6} className="text-end">
-                                {(parseInt(tour.gia.replace(/\./g, "").replace("đ", ""), 10) * adultCount +
-                                    parseInt(tour.gia.replace(/\./g, "").replace("đ", ""), 10) * childCount * 0.5).toLocaleString("vi-VN")}đ
+                                <strong style={{ color: "red" }}>
+                                    {(parseInt(tour.gia.replace(/\./g, "").replace("đ", ""), 10) * adultCount +
+                                        parseInt(tour.gia.replace(/\./g, "").replace("đ", ""), 10) * childCount * 0.5).toLocaleString("vi-VN")}đ
+                                </strong>
                             </Col>
                         </Row>
-                        <Button variant="primary" className="w-100 mt-3">
-                            Nhập thông tin đặt tour
+                        {/* <Button variant="primary" className="w-100 mt-3 fw-bold">
+                           Đặt tour
+                        </Button> */}
+                        <Button className="mt-3" variant="primary" onClick={handleBooking}>
+                            Đặt Tour
                         </Button>
                     </Card>
 
@@ -827,5 +895,6 @@ function Payment() {
         </Container>
     );
 }
-export default Payment;
 
+
+export default Payment;
