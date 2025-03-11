@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import TourDetail from "./pages/TourDetail";
+import Payment from "./pages/Payment.jsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // import Footer from "./components/Footer";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/tour/:id" element={<TourDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/payment/:id" element={<Payment />} />
       </Routes>
     </Router>
   );

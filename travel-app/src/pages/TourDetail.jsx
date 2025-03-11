@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
 import { useEffect } from "react";
 
@@ -460,8 +460,6 @@ const dsTour = [
     },
   ];
 
-
-
 function TourDetail() {
   const { id } = useParams();
   const tour = dsTour.find((t) => t.maTour === parseInt(id));
@@ -473,6 +471,8 @@ function TourDetail() {
   if (!tour) {
     return <h2 className="text-center mt-5">Tour không tồn tại</h2>;
   }
+
+  
 
   return (
     <Container className="my-5" style={{ marginTop: "100px", marginBottom: "20px" }}>
@@ -535,39 +535,44 @@ function TourDetail() {
             <h3 className="text-blue fw-bold">Lịch trình và Giá</h3>
             <h6 className="my-4">Chọn ngày khởi hành và xem giá</h6>
             <Form.Group className="text-center mb-4">
-              <Form.Control type="date" className="w-50 mx-auto" defaultValue={tour.ngayKhoiHanh.split("/").reverse().join("-")} />
+              <Form.Control type="date" className="w-50 mx-auto" defaultValue={new Date().toISOString().split("T")[0]} />
             </Form.Group>
 
             <Row className="inputngay my-4 align-items-center">
               <Col>Người lớn</Col>
               <Col>{tour.gia}</Col>
-              <Col className="d-flex justify-content-end ">
+              {/* <Col className="d-flex justify-content-end ">
                 <Button variant="outline-secondary" size="" className="me-2">-</Button>
                 <Form.Control type="text" value="1" readOnly  className="w-25 text-center" />
                 <Button variant="outline-secondary"  className="ms-2">+</Button>
-              </Col>
+              </Col> */}
             </Row>
             <Row className="inputngay my-4 align-items-center">
               <Col>Trẻ em</Col>
-              <Col></Col>
-              <Col className="d-flex justify-content-end">
+              <Col>{(parseInt(tour.gia.replace(/\./g, "").replace("đ", ""), 10) / 2).toLocaleString("vi-VN")}đ</Col>
+
+
+              {/* <Col className="d-flex justify-content-end">
                 <Button variant="outline-secondary"  className="me-2">-</Button>
                 <Form.Control type="text" value="0" readOnly className="w-25 text-center" />
                 <Button variant="outline-secondary"  className="ms-2">+</Button>
-              </Col>
+              </Col> */}
             </Row>
-            <Row className="my-4 align-items-center">
+            {/* <Row className="my-4 align-items-center">
               <Col><h6>Tổng Giá Tour</h6></Col>
               <Col><span className="text-blue h3">{tour.gia}</span></Col>
-            </Row>
+            </Row> */}
             <Row className="my-4">
               <Col>
                 <Button variant="outline-danger" className="w-100 fw-bold fs-5">Liên hệ tư vấn</Button>
               </Col>
               <Col>
-                <Button variant="danger" className="w-100 fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#bookingModal">
+              <Link
+                  to={`/payment/${id}`} // Điều hướng đến trang thanh toán
+                  className="btn btn-danger w-100 fw-bold fs-5" // Giữ kiểu dáng như Button
+                >
                   Đặt Tour ngay
-                </Button>
+                </Link>
               </Col>
             </Row>
           </Card>
