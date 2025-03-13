@@ -53,21 +53,6 @@ function Payment() {
     if (!tour) {
         return <h2 className="text-center mt-5">Tour không tồn tại</h2>;
     }
-    // Dữ liệu mẫu cho chuyến bay (có thể thay đổi sau)
-    const flightInfo = {
-        departure: {
-            time: "11:15",
-            date: "13/03/2025",
-            location: "SGN",
-            airline: "Bamboo Airways",
-        },
-        return: {
-            time: "14:00",
-            date: "17/03/2025",
-            location: "DMK",
-            airline: "Bamboo Airways",
-        },
-    };
 
     // sử dung context api
     const { bookTour } = useBooking();
@@ -77,15 +62,6 @@ function Payment() {
         console.log(tour.tenTour);
         if (validateBooking()) {
             const newTour = {
-                // name: tour.tenTour, // Thay bằng state động nếu có
-                // departureDate: tour.thoiGian,
-                // price: tour.price,
-                // passengers: 2,
-                // image: tour.hinhAnh,
-                // dateStart: tour.ngayKhoiHanh,
-                // total: 100000
-
-                
                 name: tour.tenTour, // Thay bằng state động nếu có
                 departureDate: tour.ngayKhoiHanh,
                 price: tour.gia,
@@ -94,7 +70,7 @@ function Payment() {
             };
     
             bookTour(newTour); // Lưu vào context
-            alert("Đặt tour thành công!");
+            // alert("Đặt tour thành công!");
             navigate("/OrderHistory"); // Chuyển hướng đến lịch sử đặt tour
         }
         
@@ -140,7 +116,7 @@ function Payment() {
                 {/* Cột trái: Thông Tin Liên Lạc và Hành Khách */}
                 <Col md={6} sm={12}>
                     {/* Thông Tin Liên Lạc */}
-                    <Card className="p-4 mb-4 shadow">
+                    <div className="p-4 mb-4 shadow custom-box">
                         <h4 className="text-primary fw-bold">Thông Tin Liên Lạc</h4>
                         <Form>
                             <Row className="mb-3">
@@ -178,11 +154,11 @@ function Payment() {
                                 </Col>
                             </Row>
                         </Form>
-                    </Card>
+                    </div>
 
 
                     {/* Hành Khách */}
-                    <Card className="p-4 mb-4 shadow">
+                    <div className="p-4 mb-4 shadow custom-box">
                         <h4 className="text-primary fw-bold">Hành Khách</h4>
                         <Row className="align-items-center mb-3">
                             <Col>Người lớn</Col>
@@ -221,10 +197,10 @@ function Payment() {
 
                         </Row>
                         <small className="text-muted">Từ 12 tuổi trở xuống</small>
-                    </Card>
+                    </div>
 
                     {/* Thông Tin Hành Khách */}
-                    <Card className="p-4 mb-4 shadow">
+                    <div className="p-4 mb-4 shadow custom-box">
                         <h4 className="text-primary fw-bold">Thông Tin Hành Khách</h4>
                         <p>
                             <small className="text-muted">
@@ -340,14 +316,15 @@ function Payment() {
                                 ))}
                             </>
                         )}
-                    </Card>
+                    </div>
 
 
                 </Col>
 
                 {/* Cột phải: Tóm Tắt Chuyến Đi và Thông Tin Chuyến Bay */}
                 <Col md={6} sm={12}>
-                    <Card className="p-4 mb-4 shadow">
+                <div className="fixed-sidebar">
+                    <div className="p-4 mb-4 shadow custom-box">
                         <h4 className="text-primary fw-bold">Tóm Tắt Chuyến Đi</h4>
                         <Row className="align-items-center">
                             {/* Cột chứa hình ảnh */}
@@ -368,10 +345,10 @@ function Payment() {
                                 <p>Phương tiện: {tour.phuongTien}</p>
                             </Col>
                         </Row>
-                    </Card>
+                    </div>
                     {/* Khách hàng + phụ thu */}
 
-                    <Card className="p-4 mb-4 shadow">
+                    <div className="p-4 mb-4 shadow custom-box">
                         <h4 className="text-primary fw-bold">Khách Hàng + Phụ Thu</h4>
                         <Row className="fw-bold text-center">
                             <Col xs={3}>Loại vé</Col>
@@ -413,10 +390,12 @@ function Payment() {
                         {/* <Button variant="primary" className="w-100 mt-3 fw-bold">
                            Đặt tour
                         </Button> */}
-                        <Button className="mt-3" variant="primary" onClick={handleBooking}>
+                        <Button className="mt-3 w-100" variant="primary" onClick={handleBooking}>
                             Đặt Tour
                         </Button>
-                    </Card>
+                    </div>
+
+                </div>
 
 
 

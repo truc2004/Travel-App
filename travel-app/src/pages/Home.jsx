@@ -14,15 +14,15 @@ function Home() {
     // };
     
   return (
-    <Container fluid className="my-5">
+    <Container fluid className=" p-0">
       {/* SLIDER */}
       <div className="slider">
         <Carousel id="demo" className="w-100">
-          <Carousel.Item>
-            <img 
+        <Carousel.Item>
+            <img
               className="d-block w-100 img-fluid"
-              src="/src/image/HoiAn.jpg" 
-              alt="Hoi An"
+              src="/src/image/river-4705974_1280.jpg"
+              alt="River"
             />
           </Carousel.Item>
           <Carousel.Item>
@@ -33,17 +33,17 @@ function Home() {
             />
           </Carousel.Item>
           <Carousel.Item>
-            <img
+            <img 
               className="d-block w-100 img-fluid"
-              src="/src/image/river-4705974_1280.jpg"
-              alt="River"
+              src="/src/image/HoiAn.jpg" 
+              alt="Hoi An"
             />
           </Carousel.Item>
         </Carousel>
       </div>
 
       {/* SEARCH TOOL */}
-      <div className="search-tool mt-4 rounded-3">
+      <div className="search-tool mt-5 rounded-3 mb-5">
         <Form className="p-4 border border-2 border-white rounded-circle">
           <Row className="g-2 align-items-center">
             <Col md={3}>
@@ -83,9 +83,10 @@ function Home() {
       </div>
 
       {/* TOUR KHUYẾN MÃI */}
-      <div className="content mt-4 py-4 p">
+      <div className="content mt-4 py-4 p"  style={{background: "#FEEEC7"}}>
         <div className="content-item">
-          <h3 className="fw-bold text-primary">Tour khuyến mãi</h3>
+          <h3 className="fw-bold text-primary">Tour ưu đãi tốt nhất hôm nay</h3>
+          <p>Nhanh tay đặt ngay kẻo mai sẽ lỡ!</p>
           <hr className="mb-4" />
           <Row id="table1">
           {hotTours.map((tour) => (
@@ -131,9 +132,10 @@ function Home() {
 
 
       {/* TOUR DU LICH */}
-      <div className="content mt-4 py-4 ">
+      <div className="content py-4 " style={{background: "#F6F8FA"}}>
         <div className="content-item">
-          <h3 className="fw-bold text-primary">Tour du lich</h3>
+          <h3 className="fw-bold text-primary">Tour du lịch</h3>
+          <p>Chinh phục cuộc sống, khám phá điều mới!</p>
           <hr className="mb-4" />
           <Row id="table1">
           {regularTours.map((tour) => (

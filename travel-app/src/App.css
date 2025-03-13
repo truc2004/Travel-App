@@ -76,7 +76,7 @@
 }
 
 .navbar-nav .nav-link {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   margin: 0 30px;
   display: flex;
@@ -91,7 +91,7 @@
   text-decoration-color: #006CB0; 
   text-decoration-thickness: 3px; 
 
-  font-size: 23px;
+  font-size: 18px;
   font-weight: 500;
   margin: 0 30px; /* Tạo khoảng cách giữa các chữ */
   display: flex;
@@ -99,7 +99,7 @@
 }
 
 .navbar-nav .nav-link.active {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: bold;  /* Làm chữ đậm */
   color: #006CB0; /* Màu chữ xanh dương */
   text-decoration: underline; /* Gạch chân */
@@ -211,25 +211,29 @@
 
   
     
-.card:hover, .search-tool:hover  {
+.card:hover  {
   cursor: pointer;
   transform: scale(1.02);
   
 }
 
 .card-hover {
-  transition: transform 0.3s ease;
+  /* transition: transform 0.3s ease;*/
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-hover:hover {
   cursor: pointer;
   transform: scale(1.02);
+  /* background-color: #f1f1f1; */
+
+  box-shadow: 2px 5px 11px #3C669E; /* Bóng màu xanh dương */
 }
 
-.search-tool:hover {
+/* .search-tool:hover {
   cursor: pointer;
   transform: scale(1.02);
-}
+} */
 
 .image-container {
   position: relative;
@@ -294,13 +298,13 @@
 }
 
 /* chi tiet tour */
-.cap1:hover{
+/* .cap1:hover{
   color: #DC3545;
   cursor: pointer;
   transform: scale(1.01);
   
 
-}
+} */
 
 /* mo ta */
 .box {
@@ -410,3 +414,12 @@
   word-spacing: 2px
 }
 
+.fixed-sidebar {
+  position: sticky;
+  top: 100px; /* Giữ khoảng cách từ trên xuống */
+}
+
+.custom-box {
+  border: 1px solid #EAEAEA;
+  border-radius: 10px;
+}

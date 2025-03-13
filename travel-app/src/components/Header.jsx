@@ -20,17 +20,18 @@ function Header() {
           </NavLink>
 
           {/* Các mục menu */}
-          <div className="collapse navbar-collapse justify-content-start" id="navbarNav" style={{ marginLeft: "60px" }}>
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav" style={{ marginRight: "60px" }}>
             <ul className="navbar-nav">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">Trang chủ</NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className="nav-link" to="/orderHistory">Lich sử chuyến đi</NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/about">Liên hệ</NavLink>
               </li>
-              {/* <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">Contact</NavLink>
-              </li> */}
+             
             </ul>
           </div>
 
